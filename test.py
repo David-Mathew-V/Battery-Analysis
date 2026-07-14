@@ -4,6 +4,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-print("Hello")
+print("Hell")
 name = os.getenv("user_name") or "Unknown"
 print("Name: " + name)
