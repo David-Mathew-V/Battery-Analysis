@@ -1,1 +1,6 @@
 .env
+output/
+.gitignore
+temp.py
+test.ipynb
+__pycache__/
