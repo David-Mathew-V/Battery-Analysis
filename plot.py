@@ -1,17 +1,20 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 
-df = pd.read_csv("output/delta_R.csv")
+df = pd.read_csv("output/delta_R(3-51).csv")
+
+bins = np.arange(60, 120, 5) 
 
 plt.figure(figsize=(10, 6))
 
-plt.scatter(df.index, df["Percent_Change"], s=20)
+plt.hist(df["Percent_Change"], bins=bins, edgecolor="black")
 
-plt.xlabel("Row Index")
-plt.ylabel("Percentage Change (%)")
-plt.title("Percentage Change Between Cycle 50 and 51")
+plt.xlabel("Percentage Change (%)")
+plt.ylabel("Number of Cells")
+plt.title("Distribution of Percentage Change (Cycle 3 → 51)")
 
-plt.grid(True)
+plt.grid(axis="y")
 plt.tight_layout()
 plt.show()
 
