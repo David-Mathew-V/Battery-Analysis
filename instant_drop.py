@@ -1,6 +1,7 @@
 from extract import create_db_engine, run_query, save_dataframe
 
 import pandas as pd
+from plot import plot_delta_V_and_resistance
 
 
 def extract_rest_events(df):
@@ -77,6 +78,7 @@ def main():
 
         filepath = save_dataframe(result)
         print(f"\nData saved successfully to:\n{filepath}")
+        plot_delta_V_and_resistance(filepath)
 
     finally:
         engine.dispose()

@@ -2,47 +2,67 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-df = pd.read_csv("output/delta_R(3-51).csv")
+def plot_histogram(filename="output/delta_R(3-51).csv"):
+    """
+    Plot a histogram of the percentage change in resistance from cycle 3 to cycle 51.
+    """
+    df = pd.read_csv(filename)
 
-bins = np.arange(60, 120, 5) 
+    bins = np.arange(60, 120, 5)  
 
-plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(10, 6))
 
-plt.hist(df["Percent_Change"], bins=bins, edgecolor="black")
+    plt.hist(df["Percent_Change"], bins=bins, edgecolor="black")
 
-plt.xlabel("Percentage Change (%)")
-plt.ylabel("Number of Cells")
-plt.title("Distribution of Percentage Change (Cycle 3 → 51)")
+    plt.xlabel("Percentage Change (%)")
+    plt.ylabel("Number of Cells")
+    plt.title("Distribution of Percentage Change (Cycle 3 → 51)")
 
-plt.grid(axis="y")
-plt.tight_layout()
-plt.show()
-
-# fig, ax = plt.subplots(2, 1, figsize=(8, 8))
-
-# # First plot: Delta V
-# ax[0].plot(
-#     df["cycleID"],
-#     df["delta_V"]
-# )
-
-# ax[0].set_xlabel("Cycle no")
-# ax[0].set_ylabel("Delta V (V)")
-# ax[0].set_title("Voltage Drop - ANUF130626A12")
-# ax[0].grid(True)
+    plt.grid(axis="y")
+    plt.tight_layout()
+    plt.show()
 
 
-# # Second plot: Resistance
-# ax[1].plot(
-#     df["cycleID"],
-#     df["Resistance"]
-# )
+def plot_delta_V_and_resistance(filename):
 
-# ax[1].set_xlabel("Cycle no")
-# ax[1].set_ylabel("Resistance (Ohms)")
-# ax[1].set_title("Resistance - ANUF130626A12")
-# ax[1].grid(True)
+    df = pd.read_csv(filename)
+    fig, ax = plt.subplots(2, 1, figsize=(8, 8))
+
+    # First plot: Delta V
+    ax[0].plot(
+        df["cycleID"],
+        df["delta_V"]
+    )
+
+    ax[0].set_xlabel("Cycle no")
+    ax[0].set_ylabel("Delta V (V)")
+    ax[0].set_title("Voltage Drop - ANUF130626A12")
+    ax[0].grid(True)
 
 
-# plt.tight_layout()
-# plt.show()
+    # Second plot: Resistance
+    ax[1].plot(
+        df["cycleID"],
+        df["Resistance"]
+    )
+
+    ax[1].set_xlabel("Cycle no")
+    ax[1].set_ylabel("Resistance (Ohms)")
+    ax[1].set_title("Resistance - ANUF130626A12")
+    ax[1].grid(True)
+
+
+    plt.tight_layout()
+    plt.show()
+
+def main():
+    # Example usage
+    filepath = input("Enter the file path for the delta_R CSV(eg:output/delta_R(3-51).csv): ")
+    plot_histogram(filepath)
+    filepath = input("Enter the file path for the instant_drop CSV(eg:output/delta_V.csv): ")
+    plot_delta_V_and_resistance(filepath)
+
+
+
+if __name__ == "__main__":
+    main()

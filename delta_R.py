@@ -1,4 +1,6 @@
 import pandas as pd
+from plot import plot_histogram
+from extract import save_dataframe
 
 # Read the CSV
 df = pd.read_csv("output/delta_V.csv")
@@ -27,4 +29,7 @@ pivot["Percent_Change"] = (
 result = pivot.reset_index()
 
 # Save to CSV
-result.to_csv("output/delta_R(3-51).csv", index=False)
+filepath = save_dataframe(result)
+
+#plotting
+plot_histogram(filepath)
